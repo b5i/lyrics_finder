@@ -1,5 +1,6 @@
 # lyrics_finder
 Lyrics finder with python, inspired from https://github.com/SimonIT/spotifylyrics
+Using https://www.megalobiz.com for lyrics database
 
 To use :
 ```
