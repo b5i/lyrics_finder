@@ -8,7 +8,7 @@ function get_lyrics (singers, songname){
 split_artists.splice(2, 0, singers);
 for (let i = 0; i < split_artists.length; i++) {
     console.log(split_artists[i]);
-    exec("python3 searcher.py '"+split_artists[i]+"' '"+songname+"' '"+singers+"' '", (error, stdout, stderr) => {
+    exec("python3 searcher.py '"+split_artists[i]+"' '"+songname+"' '"+singers+"'", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -24,7 +24,7 @@ for (let i = 0; i < split_artists.length; i++) {
     }
     else{
         console.log('LYRICS FOUNDS')
-        console.log(singers + ' - ' + 'songname' + '.lrc')
+        console.log(singers + ' - ' + songname + '.lrc')
 
     }
 
