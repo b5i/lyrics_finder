@@ -9,7 +9,8 @@ pip3 install -r requirements.txt
 npm install
 ```
 Make sure you complete the file search.js with the artist(s) name(s) and the title of the track.
-<img width="1361" alt="Capture d’écran 2021-10-04 à 18 12 02" src="https://user-images.githubusercontent.com/44288655/135889820-9578a821-4fbe-467f-8718-8e85f24f2843.png">
+<img width="1317" alt="Capture d’écran 2021-10-04 à 18 37 17" src="https://user-images.githubusercontent.com/44288655/135890019-4a08fe9f-1395-4426-8a8e-a36be52f5ade.png">
+
 
 
 ```
