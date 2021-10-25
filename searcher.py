@@ -1,4 +1,6 @@
+# Script by @antoinebollengier and  https://github.com/SimonIT/spotifylyrics
 import os
+import platform
 import re
 from urllib import request, parse
 import sys
@@ -6,10 +8,8 @@ import argparse
 import requests
 import unidecode  # to remove accents
 from bs4 import BeautifulSoup
-from fuzzywuzzy import fuzz
 
 def megalobiz(artist, songname):
-    service_name = "Megalobiz"
 
     search_url = "https://www.megalobiz.com/search/all?%s" % parse.urlencode({
         "qry": f"{artist} {songname}",
@@ -29,8 +29,9 @@ def megalobiz(artist, songname):
     for result_link in result_links:
         lower_title = result_link.get_text().lower()
         entire_string = lower_title + ' - ' + artist.lower()
-        Ratio = fuzz.ratio(entire_string.lower(),lower_title.lower())
-        if Ratio > 85:
+        #Ratio = fuzz.ratio(entire_string.lower(),lower_title.lower())
+        #if Ratio > 85:
+        if artist.lower() in lower_title and songname.lower() in lower_title: 
             url = f"https://www.megalobiz.com{result_link['href']}"
             possible_text = requests.get(url)
             soup = BeautifulSoup(possible_text.text, 'html.parser')
@@ -42,9 +43,24 @@ def megalobiz(artist, songname):
             print(lrc)
             f.close()
             ok = 1
-            print(filename_lrc)
-            os.system('mkdir -p lyrics')
-            os.system("mv '" + filename_lrc + "' 'lyrics/" + b_artist + ' - ' + b_title + '.lrc'+"'")
+            os_platform = platform.system()
+            if os_platform == 'Linux':
+                os_final = 'Linux'
+                os.system('mkdir -p lyrics')
+                os.system("mv '" + filename_lrc + "' 'lyrics/" + b_artist + ' - ' + b_title + '.lrc'+"'")
+            elif os_platform == 'Windows':
+                os_final = 'Windows'
+                os.system('mkdir -p lyrics')
+                os.system("move '" + filename_lrc + "' 'lyrics/" + b_artist + ' - ' + b_title + '.lrc'+"'")
+            elif os_platform == 'Darwin':
+                os_final = 'MacOS'
+                os.system('mkdir -p lyrics')
+                os.system("mv '" + filename_lrc + "' 'lyrics/" + b_artist + ' - ' + b_title + '.lrc'+"'")
+            else:
+                os_final = 'Dunno'
+                os.system('mkdir -p lyrics')
+                os.system("mv '" + filename_lrc + "' 'lyrics/" + b_artist + ' - ' + b_title + '.lrc'+"'")                
+            print("lyrics/" + b_artist + ' - ' + b_title + '.lrc')
             exit()
     print('LYRICS NOT FOUND')
 
